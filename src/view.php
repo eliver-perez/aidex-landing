@@ -21,9 +21,14 @@ function icon(string $name, string $class = ''): string
         'menu' => '<path d="M4 6h16M4 12h16M4 18h16"/>',
         'mail' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>',
         'plus' => '<path d="M12 5v14M5 12h14"/>',
+        'chart' => '<path d="M3 3v18h18M8 16v-5m5 5V7m5 9v-8"/>',
+        'folder-search' => '<path d="M10 20H3V5h6l3 3h9v3"/>'
+            . '<circle cx="16" cy="16" r="4"/><path d="m19 19 3 3"/>',
+        'clock' => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+        'alert' => '<path d="m12 3 10 18H2Zm0 6v5m0 3v1"/>',
     ];
 
     return '<svg class="icon ' . escape($class) . '" width="24" height="24" viewBox="0 0 24 24" '
-        . 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" '
+        . 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" '
         . 'stroke-linejoin="round" aria-hidden="true">' . ($paths[$name] ?? $paths['file']) . '</svg>';
 }

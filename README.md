@@ -1,6 +1,6 @@
 # AIDEX · Landing oficial
 
-Primera versión local del sitio comercial de **AIDEX — Aplicación de Indexación
+Segunda revisión local del sitio comercial de **AIDEX — Aplicación de Indexación
 Digital de Expedientes**. HTML semántico, CSS, JavaScript y PHP independientes de
 la aplicación y del servidor de licencias. No utiliza base de datos, frameworks
 frontend, CDN, analítica ni herramientas de compilación para funcionar.
@@ -150,13 +150,18 @@ comercial definitivo. No se ha enviado correo externo durante el desarrollo.
 `public/index.php` contiene textos, secciones y estructura del formulario.
 `public/assets/css/site.css` contiene la identidad y los puntos de adaptación.
 `public/assets/js/site.js` contiene menú, pestañas, búsqueda ilustrativa y envío.
+`src/views/indicators.php` contiene el dashboard conceptual con SVG y tablas
+accesibles. No se añadió una dependencia de gráficos ni se cambió el backend SMTP.
 
 La landing incluye presentación, problema/solución, capacidades, muestra
-interactiva, proceso de tres pasos, contacto y pie de página. Las capacidades
+interactiva con Búsqueda, Bibliotecas, Trazabilidad e Indicadores, proceso de tres
+pasos, contacto y pie de página. Las capacidades
 publicadas están contrastadas en `docs/capacidades.md`.
 
-Los ejemplos se identifican como ilustrativos y solo consultan registros ficticios
-del JavaScript local. Las imágenes de marca son copias intactas de los SVG oficiales.
+El componente conserva una etiqueta discreta «Vista de demostración · Datos de
+ejemplo». La búsqueda solo consulta registros ficticios del JavaScript local.
+El dashboard usa cifras fijas coherentes con sus gráficos, no estadísticas de
+clientes. Los enlaces «Ver datos» despliegan las tablas de esos mismos valores. Las imágenes de marca son copias intactas de los SVG oficiales.
 El archivo `tools/social-card.html` conserva la fuente editable de la tarjeta Open
 Graph, ya generada en `public/assets/img/social-card.png` (1200 × 630).
 

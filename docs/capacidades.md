@@ -13,15 +13,20 @@ elaborada el 11 de octubre de 2026. Los originales permanecen fuera del sitio.
 | Acceso por perfiles y permisos de biblioteca | 2.3; 3.5 | Sin afirmar certificaciones, cifrado integral ni garantías de seguridad. |
 | Historial y auditoría | 10.1–10.5 | Solo acciones registradas en AIDEX; no equivale a registrar toda edición externa del archivo. |
 | Cargas, clasificación y aprobación ilustrativas | 7.1–7.6; 8.1–8.6 | Aprobación cuando esté configurada y con permisos. |
+| Indicadores y gráficos del dashboard | 14.1–14.2 | Total de documentos, índice vigente, estado del procesamiento e incorporaciones por día. Las cifras son ficticias. |
 
 ## Decisiones de contenido
 
 - Público amplio: mensajes sobre necesidades documentales, sin centrar el producto en un sector.
 - No se publican precios, planes, clientes, testimonios, cifras comerciales ni descargas del software.
 - No se presenta como SaaS ni se afirma funcionamiento en la nube.
-- Las tarjetas del hero, la búsqueda, el expediente y la línea de tiempo son HTML/CSS conceptual.
+- Las tarjetas del hero, la búsqueda, la biblioteca, el expediente, la línea de tiempo y el dashboard son HTML/CSS conceptual.
 - Los documentos, usuarios, identificadores y fechas de la demostración son ficticios.
 - La muestra busca solo en cuatro registros locales. No accede a la aplicación AIDEX.
+- Las cifras del dashboard son un conjunto de ejemplo: 1,280 registrados =
+  1,152 con índice vigente + 104 pendientes + 24 con error de extracción.
+  El gráfico de incorporaciones suma 155 (18 + 32 + 24 + 45 + 36); el 90 %
+  indexado corresponde a 1,152 / 1,280. Las tablas muestran esos mismos valores.
 - «2 de 3» representa requisitos de un expediente ficticio; no es una estadística del producto.
 - Se incluye una nota sobre módulos, configuración y permisos.
 - No se reutilizaron capturas del manual: así se evita divulgar datos y se mantiene nitidez en todas las pantallas.

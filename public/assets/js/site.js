@@ -224,6 +224,14 @@ function initializeContactForm() {
     const fields = ['nombre', 'empresa', 'correo', 'telefono', 'mensaje'];
     let submitting = false;
 
+    function showStatus(state, message) {
+        // La visibilidad depende del mensaje real, nunca de espacios en el HTML.
+        const text = message.trim();
+        status.dataset.state = state;
+        status.classList.toggle('is-visible', text.length > 0);
+        status.textContent = text;
+    }
+
     function clearErrors() {
         fields.forEach((name) => {
             document.querySelector(`#error-${name}`).textContent = '';
@@ -266,8 +274,7 @@ function initializeContactForm() {
         submit.disabled = true;
         form.setAttribute('aria-busy', 'true');
         label.textContent = 'Enviando solicitud…';
-        status.classList.remove('is-success');
-        status.textContent = 'Estamos enviando tu solicitud.';
+        showStatus('info', 'Estamos enviando tu solicitud.');
 
         try {
             const response = await fetch(form.action, {
@@ -282,12 +289,15 @@ function initializeContactForm() {
                 throw new Error('Respuesta inesperada');
             }
 
-            status.textContent = result.message;
+            const successful = response.ok && result.ok === true;
+            const state = successful
+                ? 'success'
+                : ([403, 422, 429, 503].includes(response.status) ? 'warning' : 'error');
+            showStatus(state, result.message);
             showErrors(result.errors || {});
 
             if (response.ok && result.ok === true) {
                 form.reset();
-                status.classList.add('is-success');
             }
 
             if (typeof result.csrf === 'string') {
@@ -297,7 +307,10 @@ function initializeContactForm() {
             const invalidField = form.querySelector('[aria-invalid="true"]');
             (invalidField || status).focus();
         } catch {
-            status.textContent = 'No pudimos confirmar el envío. Revisa tu conexión e inténtalo más tarde.';
+            showStatus(
+                'error',
+                'No pudimos confirmar el envío. Revisa tu conexión e inténtalo más tarde.'
+            );
             status.focus();
         } finally {
             submitting = false;

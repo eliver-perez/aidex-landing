@@ -4,7 +4,7 @@ const path = require('node:path');
 const prettier = require('prettier');
 
 (async () => {
-    const file = path.join(__dirname, '../public/index.php');
+    const file = path.resolve(__dirname, '..', process.argv[2] || 'public/index.php');
     const blocks = [];
     const source = fs.readFileSync(file, 'utf8').replace(/<\?(?:php|=)[\s\S]*?\?>/g, (block) => {
         const index = blocks.push(block) - 1;

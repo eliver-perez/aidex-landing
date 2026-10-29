@@ -1,6 +1,6 @@
 # Informe de verificación
 
-Revisión realizada sobre la primera versión local. Las pruebas no acceden a la
+Revisión realizada sobre la segunda revisión local. Las pruebas no acceden a la
 aplicación AIDEX ni a sus bases de datos, repositorios o servidor de licencias.
 
 ## Resultado
@@ -13,11 +13,15 @@ aplicación AIDEX ni a sus bases de datos, repositorios o servidor de licencias.
 | Carga | HTTP 200, imágenes decodificadas, una etiqueta h1 y un main | Correcto |
 | Navegación | Todas las anclas apuntan a elementos existentes | Correcto |
 | Muestra | Búsqueda por palabra, filtros, cero resultados y ficha modal | Correcto |
-| Pestañas | Clic, flechas, Home, panel activo y estado ARIA | Correcto |
+| Pestañas | Búsqueda, Bibliotecas, Trazabilidad e Indicadores; clic, flechas, Home/End y estado ARIA | Correcto |
+| Dashboard | Tarjetas, gráficos SVG, tablas desplegables y adaptación en las cuatro vistas | Correcto |
+| Tarjetas | Seis capacidades; tres columnas en escritorio, dos en tablet y una en móvil; iconos y títulos centrados verticalmente | Correcto |
+| Avisos del formulario | Contenedor vacío sin altura, con y sin JavaScript; advertencia real de SMTP sin configurar | Correcto |
+| Estados visuales | Error y éxito mediante respuestas HTTP interceptadas solo en la prueba de navegador | Correcto; el flujo SMTP se comprueba por separado contra el receptor local |
 | Menú móvil | Apertura, navegación y cierre | Correcto |
 | Adaptación | 320, 375, 390, 768, 1024 y 1440 px sin desbordamiento horizontal | Correcto |
 | Movimiento reducido | Desactiva desplazamiento suave y transiciones | Correcto |
-| Accesibilidad automática | axe: WCAG 2 A/AA y 2.1 AA; escritorio, tres paneles y móvil | Sin hallazgos en los estados revisados |
+| Accesibilidad automática | axe: WCAG 2 A/AA y 2.1 AA; escritorio, cuatro paneles y móvil | Sin hallazgos en los estados revisados |
 | Sin JavaScript | Navegación visible, POST con redirección y conservación escapada de campos | Correcto |
 | Campos | Requeridos, correo inválido, longitud, espacios vacíos y teléfono | Correcto |
 | Inyección de encabezados | Correo con CR/LF y Bcc | Rechazado |
@@ -36,7 +40,9 @@ aplicación AIDEX ni a sus bases de datos, repositorios o servidor de licencias.
 ## Revisión visual
 
 Se inspeccionaron las capturas completas de escritorio y móvil. Se ajustaron
-contrastes de textos secundarios después de la primera auditoría. Se revisaron
+la navegación compacta, las tarjetas, el selector segmentado, el panel destacado
+de solución y el proceso con iconos. La transición de pestañas conserva la
+opacidad del texto para no perder contraste durante el cambio. Se revisaron
 la distribución del hero, tarjetas, paneles y formulario. Los artefactos de
 navegador se conservan en `tests/artifacts/`, excluidos del paquete de publicación.
 
@@ -63,3 +69,15 @@ ni se reutilizaron capturas potencialmente sensibles.
   observaron errores de la aplicación durante las pruebas.
 - Aviso de privacidad, dirección comercial y credenciales definitivas siguen
   pendientes de configuración por el responsable del sitio.
+
+## Alcance de la segunda revisión
+
+- Se conservan la arquitectura, los logotipos y la configuración de publicación.
+- `public/contact.php`, `src/contact.php`, `src/bootstrap.php`,
+  `config/environment.php`, `.env.example` y `docs/nginx.conf` no se modificaron.
+- El aviso vacío se corrige con una clase de visibilidad explícita y estados de
+  presentación; no depende de `:empty`, que cuenta espacios del HTML.
+- Se volvió a ejecutar la integración HTTP/SMTP local, sin enviar correo externo.
+- La inspección web de `https://aidex.com.mx` no estuvo disponible desde la
+  herramienta de navegación. La implementación y la revisión visual se realizaron
+  sobre el código local existente. No se publicaron cambios.

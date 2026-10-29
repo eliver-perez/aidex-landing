@@ -11,6 +11,8 @@ $privacyUrl = publicUrl(setting('PRIVACY_URL'));
 $contactEmail = filter_var(setting('CONTACT_EMAIL'), FILTER_VALIDATE_EMAIL) ?: '';
 $flash = $_SESSION['flash'] ?? [];
 $old = $_SESSION['old'] ?? [];
+$formMessage = trim($flash['message'] ?? '');
+$formState = !empty($flash['ok']) ? 'success' : 'error';
 unset($_SESSION['flash'], $_SESSION['old']);
 
 function oldValue(string $field): string
@@ -86,11 +88,11 @@ function oldValue(string $field): string
                     <?= icon('menu') ?>
                 </button>
                 <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-                    <a href="#solucion">La solución</a>
-                    <a href="#funcionalidades">Funcionalidades</a>
-                    <a href="#conoce-aidex">Conoce AIDEX</a>
+                    <a href="#solucion">Por qué AIDEX</a>
+                    <a href="#funcionalidades">Capacidades</a>
+                    <a href="#conoce-aidex">Explora AIDEX</a>
                     <a class="button button-small button-nav" href="#contacto">
-                        Solicitar demo <?= icon('diagonal') ?>
+                        Solicitar demostración <?= icon('diagonal') ?>
                     </a>
                 </nav>
             </header>
@@ -257,27 +259,44 @@ function oldValue(string $field): string
 
             <section class="section solution" id="solucion" aria-labelledby="solution-title">
                 <div class="container solution-grid">
-                    <div>
-                        <p class="eyebrow">MENOS BÚSQUEDAS. MÁS CLARIDAD.</p>
-                        <h2 id="solution-title">
-                            Tus documentos ya existen.
-                            <br />
-                            <span class="muted-heading">Ahora, hazlos accesibles.</span>
-                        </h2>
-                    </div>
                     <div class="solution-copy">
+                        <p class="eyebrow">POR QUÉ AIDEX</p>
+                        <h2 id="solution-title">
+                            Que encontrar un documento
+                            <br />
+                            no detenga tu trabajo.
+                        </h2>
+                        <p>La información está ahí. El tiempo se pierde intentando localizarla.</p>
+                        <ul class="problem-list">
+                            <li>
+                                <?= icon('folder') ?>
+                                <span>Carpetas dispersas y archivos difíciles de ubicar.</span>
+                            </li>
+                            <li>
+                                <?= icon('search') ?>
+                                <span>Búsquedas manuales que interrumpen tus tareas.</span>
+                            </li>
+                            <li>
+                                <?= icon('layers') ?>
+                                <span>Expedientes sin una estructura clara para consultar.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="solution-highlight">
+                        <span class="feature-icon"><?= icon('folder-search') ?></span>
+                        <h3>
+                            De archivos dispersos
+                            <br />
+                            a información
+                            <span>accesible.</span>
+                        </h3>
                         <p>
-                            Carpetas dispersas, nombres que no recuerdas y tiempo que se va
-                            buscando. La información está ahí; lo difícil es encontrarla cuando la
-                            necesitas.
+                            Con AIDEX, organiza tus bibliotecas, localiza contenido indexado y
+                            consulta tus documentos con los permisos que corresponden.
                         </p>
-                        <p>
-                            <strong>
-                                AIDEX conecta tus documentos con una forma más clara de trabajar:
-                            </strong>
-                            bibliotecas organizadas, contenido indexado y acceso según los permisos
-                            de cada persona.
-                        </p>
+                        <a class="solution-link" href="#conoce-aidex">
+                            Descubre cómo funciona <?= icon('arrow') ?>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -286,7 +305,7 @@ function oldValue(string $field): string
                 <div class="container">
                     <div class="section-heading">
                         <div>
-                            <p class="eyebrow">ORDEN QUE SE CONVIERTE EN CONTROL</p>
+                            <p class="eyebrow">CAPACIDADES PARA TU GESTIÓN DOCUMENTAL</p>
                             <h2 id="features-title">Más que guardar archivos.</h2>
                         </div>
                         <p>
@@ -296,79 +315,65 @@ function oldValue(string $field): string
                         </p>
                     </div>
                     <div class="feature-grid">
-                        <article class="feature-card feature-card-highlight">
+                        <article class="feature-card">
                             <div class="feature-top">
                                 <span class="feature-icon"><?= icon('folder') ?></span>
-                                <span class="feature-number">01</span>
+                                <h3>Bibliotecas a tu medida</h3>
                             </div>
-                            <h3>Un lugar para cada documento</h3>
                             <p>
                                 Vincula carpetas existentes, incorpora nuevos archivos o combina
-                                ambas formas en tus bibliotecas.
+                                ambas formas de trabajo en una biblioteca.
                             </p>
-                            <div class="feature-tags">
-                                <span>Vinculada</span>
-                                <span>Administrada</span>
-                                <span>Híbrida</span>
-                            </div>
                         </article>
                         <article class="feature-card">
                             <div class="feature-top">
                                 <span class="feature-icon"><?= icon('search') ?></span>
-                                <span class="feature-number">02</span>
+                                <h3>Búsqueda dentro de documentos</h3>
                             </div>
-                            <h3>Encuentra más allá del nombre</h3>
                             <p>
-                                Busca por nombre, expediente o contenido indexado. Afina los
+                                Localiza nombres, expedientes y contenido indexado. Acota los
                                 resultados por biblioteca, formato y clasificación.
                             </p>
-                            <span class="feature-detail">
-                                De una palabra al documento que necesitas.
-                            </span>
                         </article>
                         <article class="feature-card">
                             <div class="feature-top">
                                 <span class="feature-icon"><?= icon('layers') ?></span>
-                                <span class="feature-number">03</span>
+                                <h3>Expedientes con estructura</h3>
                             </div>
-                            <h3>Expedientes con estructura</h3>
                             <p>
-                                Agrupa documentos relacionados y usa plantillas para identificar
-                                requisitos y consultar lo que sigue pendiente.
+                                Agrupa documentos relacionados y usa plantillas para consultar los
+                                requisitos incorporados y pendientes.
                             </p>
-                            <span class="feature-detail">Cada documento, en su contexto.</span>
                         </article>
-                    </div>
-                    <div class="secondary-features">
-                        <article>
-                            <?= icon('scan') ?>
-                            <div>
-                                <h3>Texto que puedes localizar</h3>
-                                <p>
-                                    Extracción de contenido y OCR en PDF escaneados, según su
-                                    calidad y configuración.
-                                </p>
+                        <article class="feature-card">
+                            <div class="feature-top">
+                                <span class="feature-icon"><?= icon('scan') ?></span>
+                                <h3>Extracción de texto y OCR</h3>
                             </div>
+                            <p>
+                                Convierte contenido en información que puedes buscar, incluso en PDF
+                                escaneados, según su calidad y configuración.
+                            </p>
                         </article>
-                        <article>
-                            <?= icon('shield') ?>
-                            <div>
+                        <article class="feature-card">
+                            <div class="feature-top">
+                                <span class="feature-icon"><?= icon('shield') ?></span>
                                 <h3>Acceso con permisos</h3>
-                                <p>
-                                    Perfiles y autorizaciones por biblioteca para organizar quién
-                                    puede consultar y actuar.
-                                </p>
                             </div>
+                            <p>
+                                Define perfiles y autorizaciones por biblioteca para organizar quién
+                                puede consultar documentos y realizar acciones.
+                            </p>
                         </article>
-                        <article>
-                            <?= icon('history') ?>
-                            <div>
-                                <h3>Un historial para consultar</h3>
-                                <p>
-                                    Revisa las acciones registradas sobre tus documentos y la
-                                    actividad de cada biblioteca.
-                                </p>
+                        <article class="feature-card">
+                            <div class="feature-top">
+                                <span class="feature-icon"><?= icon('history') ?></span>
+                                <h3>Trazabilidad documental</h3>
                             </div>
+                            <p>
+                                Consulta las acciones registradas sobre tus documentos y revisa la
+                                actividad de las bibliotecas según tus permisos.
+                            </p>
                         </article>
                     </div>
                     <p class="capability-note">
@@ -381,7 +386,7 @@ function oldValue(string $field): string
             <section class="section showcase" id="conoce-aidex" aria-labelledby="showcase-title">
                 <div class="container">
                     <div class="showcase-heading">
-                        <p class="eyebrow">CONOCE AIDEX</p>
+                        <p class="eyebrow">EXPLORA AIDEX</p>
                         <h2 id="showcase-title">
                             La información correcta.
                             <br />
@@ -405,7 +410,7 @@ function oldValue(string $field): string
                             tabindex="0"
                             type="button"
                         >
-                            <?= icon('search') ?> Encuentra
+                            <?= icon('search') ?> Búsqueda
                         </button>
                         <button
                             id="tab-organize"
@@ -415,7 +420,7 @@ function oldValue(string $field): string
                             tabindex="-1"
                             type="button"
                         >
-                            <?= icon('folder') ?> Organiza
+                            <?= icon('folder') ?> Bibliotecas
                         </button>
                         <button
                             id="tab-trace"
@@ -425,10 +430,24 @@ function oldValue(string $field): string
                             tabindex="-1"
                             type="button"
                         >
-                            <?= icon('history') ?> Sigue el historial
+                            <?= icon('history') ?> Trazabilidad
+                        </button>
+                        <button
+                            id="tab-indicators"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="panel-indicators"
+                            tabindex="-1"
+                            type="button"
+                        >
+                            <?= icon('chart') ?> Indicadores
                         </button>
                     </div>
                     <div class="demo-frame">
+                        <div class="demo-notice">
+                            <span class="status-dot" aria-hidden="true"></span>
+                            Vista de demostración · Datos de ejemplo
+                        </div>
                         <section
                             class="demo-panel"
                             id="panel-search"
@@ -437,7 +456,7 @@ function oldValue(string $field): string
                             tabindex="0"
                         >
                             <div class="demo-description">
-                                <span class="demo-step">01 / BÚSQUEDA DOCUMENTAL</span>
+                                <span class="demo-step">BÚSQUEDA DOCUMENTAL</span>
                                 <h3>
                                     No necesitas recordar
                                     <br />
@@ -457,10 +476,7 @@ function oldValue(string $field): string
                                 </p>
                             </div>
                             <div class="search-demo">
-                                <div class="demo-window-title">
-                                    <?= icon('search') ?> Buscar documentos
-                                    <span class="sample-badge">EJEMPLO INTERACTIVO</span>
-                                </div>
+                                <div class="demo-window-title"><?= icon('search') ?> Buscar documentos</div>
                                 <form class="demo-search-form" id="demo-search" role="search">
                                     <label class="sr-only" for="demo-query">
                                         Buscar entre documentos de ejemplo
@@ -506,15 +522,16 @@ function oldValue(string $field): string
                             hidden
                         >
                             <div class="demo-description">
-                                <span class="demo-step">02 / EXPEDIENTES Y REQUISITOS</span>
+                                <span class="demo-step">BIBLIOTECAS Y EXPEDIENTES</span>
                                 <h3>
-                                    El contexto importa.
+                                    Cada biblioteca,
                                     <br />
-                                    Conserva la estructura.
+                                    un espacio organizado.
                                 </h3>
                                 <p>
-                                    Reúne los documentos de un mismo asunto y consulta los
-                                    requisitos definidos por una plantilla.
+                                    Organiza tus documentos en bibliotecas. Dentro de ellas, reúne
+                                    los archivos de un mismo asunto y consulta los requisitos del
+                                    expediente.
                                 </p>
                                 <ul class="check-list">
                                     <li><?= icon('check') ?> Categorías y tipos documentales</li>
@@ -524,11 +541,14 @@ function oldValue(string $field): string
                             </div>
                             <div class="organization-demo">
                                 <div class="demo-window-title">
-                                    <?= icon('folder') ?> Expediente de proyecto
-                                    <span class="sample-badge">EJEMPLO</span>
+                                    <?= icon('folder') ?> Biblioteca de proyectos
                                 </div>
                                 <div class="organization-content">
-                                    <p class="app-breadcrumb">Proyectos / PR-2026-001</p>
+                                    <div class="library-context">
+                                        <span><?= icon('folder') ?> Proyectos</span>
+                                        <span class="tag">Biblioteca híbrida</span>
+                                    </div>
+                                    <p class="app-breadcrumb">Expedientes / PR-2026-001</p>
                                     <h4>Documentación del proyecto</h4>
                                     <div class="progress-caption">
                                         <span>Requisitos incorporados</span>
@@ -570,7 +590,7 @@ function oldValue(string $field): string
                             hidden
                         >
                             <div class="demo-description">
-                                <span class="demo-step">03 / TRAZABILIDAD DOCUMENTAL</span>
+                                <span class="demo-step">TRAZABILIDAD DOCUMENTAL</span>
                                 <h3>
                                     Más contexto.
                                     <br />
@@ -589,7 +609,6 @@ function oldValue(string $field): string
                             <div class="timeline-demo">
                                 <div class="demo-window-title">
                                     <?= icon('history') ?> Historial documental
-                                    <span class="sample-badge">EJEMPLO</span>
                                 </div>
                                 <div class="timeline-content">
                                     <h4>Contrato de servicios.pdf</h4>
@@ -623,11 +642,34 @@ function oldValue(string $field): string
                                 </div>
                             </div>
                         </section>
+                        <section
+                            class="demo-panel"
+                            id="panel-indicators"
+                            role="tabpanel"
+                            aria-labelledby="tab-indicators"
+                            tabindex="0"
+                            hidden
+                        >
+                            <div class="demo-description">
+                                <span class="demo-step">INDICADORES DOCUMENTALES</span>
+                                <h3>
+                                    Una vista clara
+                                    <br />
+                                    de tu archivo.
+                                </h3>
+                                <p>
+                                    Consulta el volumen documental, el estado de la indexación y las
+                                    incorporaciones recientes para dar seguimiento a tus procesos.
+                                </p>
+                                <ul class="check-list">
+                                    <li><?= icon('check') ?> Documentos e índice vigente</li>
+                                    <li><?= icon('check') ?> Pendientes y errores de procesamiento</li>
+                                    <li><?= icon('check') ?> Actividad de incorporación</li>
+                                </ul>
+                            </div>
+                            <?php require SITE_ROOT . '/src/views/indicators.php'; ?>
+                        </section>
                     </div>
-                    <p class="demo-caption">
-                        <?= icon('file') ?> Interfaz conceptual con datos ficticios. La búsqueda de esta
-                        muestra solo consulta los ejemplos de la página.
-                    </p>
                 </div>
             </section>
 
@@ -635,31 +677,31 @@ function oldValue(string $field): string
                 <div class="container">
                     <div class="section-heading">
                         <div>
-                            <p class="eyebrow eyebrow-light">UNA FORMA MÁS CLARA DE TRABAJAR</p>
+                            <p class="eyebrow eyebrow-light">ASÍ FUNCIONA AIDEX</p>
                             <h2 id="workflow-title">Del documento a la respuesta.</h2>
                         </div>
                         <a class="text-link" href="#contacto">Veámoslo con una demo <?= icon('arrow') ?></a>
                     </div>
                     <div class="steps">
                         <article>
-                            <span class="step-number">01</span>
-                            <h3>Organiza tu punto de partida</h3>
+                            <span class="step-icon"><?= icon('folder') ?></span>
+                            <h3>Organiza tus bibliotecas</h3>
                             <p>
                                 Define bibliotecas y vincula tus carpetas o incorpora documentos
                                 mediante cargas.
                             </p>
                         </article>
                         <article>
-                            <span class="step-number">02</span>
-                            <h3>Dale contexto a tus archivos</h3>
+                            <span class="step-icon"><?= icon('scan') ?></span>
+                            <h3>Clasifica e indexa</h3>
                             <p>
                                 Clasifica, asocia documentos a expedientes y procesa su contenido
                                 para facilitar la búsqueda.
                             </p>
                         </article>
                         <article>
-                            <span class="step-number">03</span>
-                            <h3>Encuentra y da seguimiento</h3>
+                            <span class="step-icon"><?= icon('folder-search') ?></span>
+                            <h3>Encuentra y consulta</h3>
                             <p>
                                 Localiza información, consulta documentos y revisa su historial con
                                 los permisos correspondientes.
@@ -814,13 +856,15 @@ function oldValue(string $field): string
                         </p>
                         <?php endif; ?>
                         <div
-                            class="form-status <?= !empty($flash['ok']) ? 'is-success' : '' ?>"
+                            class="form-status<?= $formMessage !== '' ? ' is-visible' : '' ?>"
+                            data-state="<?= escape($formState) ?>"
                             id="form-status"
                             role="status"
                             aria-live="polite"
+                            aria-atomic="true"
                             tabindex="-1"
                         >
-                            <?= escape($flash['message'] ?? '') ?>
+                            <?= escape($formMessage) ?>
                         </div>
                     </form>
                 </div>
