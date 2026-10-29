@@ -1,0 +1,16 @@
+{
+    "name": "aidex/landing",
+    "description": "Sitio oficial de AIDEX y formulario SMTP independiente",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.2",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "phpmailer/phpmailer": "^7.1"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": false
+    }
+}

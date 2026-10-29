@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+/vendor/
+/storage/*
+!/storage/.gitkeep
+/tests/artifacts/
+/node_modules/
+/dist/
+.DS_Store

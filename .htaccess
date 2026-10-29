@@ -1,0 +1,3 @@
+# Protección adicional cuando XAMPP expone accidentalmente la carpeta del proyecto.
+# En producción, Nginx debe servir exclusivamente sitio/public/.
+Require all denied
